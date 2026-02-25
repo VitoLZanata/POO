@@ -1,32 +1,36 @@
 package exercicio1;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Perfil {
+
     private String nome;
-    private Usuario usuario;
-    private LinkedList<Conteudo> conteudosAssistidos;
+    private List<String> historico;
 
-    public Perfil(String nome, Usuario usuario) {
+    public Perfil(String nome) {
         this.nome = nome;
-        this.usuario = usuario;
-        this.conteudosAssistidos = new LinkedList<>();
-        usuario.agregarPerfil(this);
-    }
-
-    public LinkedList<Conteudo> getConteudosAssistidos() {
-        return conteudosAssistidos;
-    }
-
-    public void assistirConteudo(Conteudo conteudo) {
-        conteudosAssistidos.add(conteudo);
+        this.historico = new ArrayList<>();
     }
 
     public String getNome() {
         return nome;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public void assistirFilme(Filme filme) {
+        historico.add("Filme: " + filme.getTitulo());
+    }
+
+    public void assistirEpisodio(Serie serie, Episodio episodio) {
+        historico.add("Série: " + serie.getTitulo() +
+                      " - Ep " + episodio.getNumero() +
+                      " (" + episodio.getTitulo() + ")");
+    }
+
+    public void listarHistorico() {
+        System.out.println("Histórico do perfil " + nome + ":");
+        for (String item : historico) {
+            System.out.println("- " + item);
+        }
     }
 }

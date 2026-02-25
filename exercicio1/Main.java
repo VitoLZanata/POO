@@ -14,26 +14,67 @@ Elenco de um filme.
 
 */
 
+import java.util.Arrays;
+
 public class Main {
-    final static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-        
-        Usuario user = new Usuario("João");
-        Perfil perfil1 = new Perfil("Perfil 1", user);
-        Perfil perfil2 = new Perfil("Perfil 2", user);
 
-        perfil1.assistirConteudo(new Conteudo("Filme 1", "Diretor 1", "Elenco 1"));
-        perfil1.assistirConteudo(new Conteudo("Série 1", "Diretor 2", "Elenco 2"));
-        perfil2.assistirConteudo(new Conteudo("Filme 2", "Diretor 3", "Elenco 3"));
+        // Criando Filme
+        Filme filme = new Filme(
+                "Interestelar",
+                "Christopher Nolan",
+                Arrays.asList("Matthew McConaughey", "Anne Hathaway"),
+                169
+        );
 
-        System.out.println("Perfis do usuário " + user.getNome() + ":");
-        for (Perfil perfil : user.getPerfis()) {
-            System.out.println("- " + perfil.getNome());
-        }
+        // Criando Série
+        Serie serie = new Serie(
+                "Stranger Things",
+                "Irmãos Duffer",
+                Arrays.asList("Millie Bobby Brown", "Finn Wolfhard")
+        );
 
-        System.out.println("\nConteúdos assistidos pelo " + perfil1.getNome() + ":");
-        for (Conteudo conteudo : perfil1.getConteudosAssistidos()) {
-            System.out.println("- " + conteudo.getTitulo());
-        }
+        // Criando Episódios
+        Episodio ep1 = new Episodio("O Desaparecimento de Will", 1, 50);
+        Episodio ep2 = new Episodio("A Estranha na Rua Maple", 2, 48);
+
+        serie.adicionarEpisodio(ep1);
+        serie.adicionarEpisodio(ep2);
+
+        // Criando Usuário
+        Usuario usuario = new Usuario("João", "joao@email.com");
+
+        // Criando Perfis
+        Perfil perfil1 = new Perfil("João");
+        Perfil perfil2 = new Perfil("Infantil");
+
+        usuario.adicionarPerfil(perfil1);
+        usuario.adicionarPerfil(perfil2);
+
+        // Assistindo conteúdos
+        perfil1.assistirFilme(filme);
+        perfil1.assistirEpisodio(serie, ep1);
+        perfil2.assistirEpisodio(serie, ep2);
+
+        System.out.println("\n--- CONSULTAS ---\n");
+
+        // Perfis do usuário
+        usuario.listarPerfis();
+
+        System.out.println();
+
+        // Histórico de um perfil
+        perfil1.listarHistorico();
+
+        System.out.println();
+
+        // Elenco de um filme
+        filme.exibirElenco();
+
+        System.out.println();
+
+        // Episódios da série
+        serie.listarEpisodios();
     }
-}   
+}

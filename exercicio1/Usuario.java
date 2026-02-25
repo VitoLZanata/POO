@@ -1,37 +1,32 @@
 package exercicio1;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario {
-    private String nome;
-    private LinkedList<Perfil> perfis;
 
-    public Usuario() {
-        this.perfis = new LinkedList<>();
+    private String nome;
+    private String email;
+    private List<Perfil> perfis;
+
+    public Usuario(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+        this.perfis = new ArrayList<>();
     }
 
-    public void agregarPerfil(Perfil perfil) {
+    public void adicionarPerfil(Perfil perfil) {
         perfis.add(perfil);
     }
 
-    public Usuario(String nome) {
-        this.nome = nome;
+    public void listarPerfis() {
+        System.out.println("Perfis do usuário " + nome + ":");
+        for (Perfil p : perfis) {
+            System.out.println("- " + p.getNome());
+        }
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public LinkedList<Perfil> getPerfis() {
+    public List<Perfil> getPerfis() {
         return perfis;
     }
-
-    public void setPerfis(LinkedList<Perfil> perfis) {
-        this.perfis = perfis;
-    }
-
 }

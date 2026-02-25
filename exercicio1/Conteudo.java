@@ -1,11 +1,14 @@
 package exercicio1;
 
-public class Conteudo {
-    private String titulo;
-    private String diretor;
-    private String elenco;
+import java.util.List;
 
-    public Conteudo(String titulo, String diretor, String elenco) {
+public abstract class Conteudo {
+
+    protected String titulo;
+    protected String diretor;
+    protected List<String> elenco;
+
+    public Conteudo(String titulo, String diretor, List<String> elenco) {
         this.titulo = titulo;
         this.diretor = diretor;
         this.elenco = elenco;
@@ -19,7 +22,14 @@ public class Conteudo {
         return diretor;
     }
 
-    public String getElenco() {
+    public List<String> getElenco() {
         return elenco;
+    }
+
+    public void exibirElenco() {
+        System.out.println("Elenco de " + titulo + ":");
+        for (String ator : elenco) {
+            System.out.println("- " + ator);
+        }
     }
 }
