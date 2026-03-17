@@ -21,10 +21,18 @@ public class DAOLista<T> implements GenericDAO<T> {
     }
 
     @Override
-    public T buscarPorId(int id) {
-        for (T t : lista) {
-            
+    public Object buscar(int id) {
+        for (Object obj : lista) {
+            try {
+                int objId = (int) obj.getClass().getMethod("getId").invoke(obj);
+                if (objId == id) {
+                    return obj;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        return null;
     }
 
     @Override

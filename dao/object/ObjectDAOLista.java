@@ -36,8 +36,13 @@ public class ObjectDAOLista implements ObjectDAO{
 
     @Override
     public void remover(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+        objects.removeIf(o -> {
+            if (o instanceof Produto) {
+                Produto p = (Produto) o;
+                return p.getId() == id;
+            }
+            return false;
+        });
     }
 
 }
